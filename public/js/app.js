@@ -38984,7 +38984,7 @@ var staticRenderFns = [
           _vm._v("Forge")
         ]),
         _vm._v(" "),
-        _c("a", { attrs: { href: "https://github.com/laravel/laravel" } }, [
+        _c("a", { attrs: { href: "https://github.com/Verron/laravel-spa" } }, [
           _vm._v("GitHub")
         ])
       ])
