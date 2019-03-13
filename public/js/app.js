@@ -1879,6 +1879,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1886,7 +1891,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       email: null,
       password: null,
-      remember: null
+      remember: null,
+      errors: {}
     };
   },
   components: {
@@ -1902,7 +1908,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.$router.push({
           name: 'home'
         });
+      }).catch(function (err) {
+        console.log(err.response, err.response);
+
+        if (err.response && err.response.status === 422) {
+          _this.errors = err.response.data.errors;
+        }
       });
+    },
+    getError: function getError(field) {
+      if (this.errors.hasOwnProperty(field)) {
+        return this.errors[field][0];
+      }
+
+      return '';
+    },
+    hasError: function hasError(field) {
+      return this.errors.hasOwnProperty(field);
     }
   }),
   mounted: function mounted() {}
@@ -38810,6 +38832,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
+                    class: { "is-invalid": _vm.hasError("email") },
                     attrs: {
                       type: "email",
                       id: "sign_in_email",
@@ -38824,7 +38847,17 @@ var render = function() {
                         _vm.email = $event.target.value
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.hasError("email")
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.getError("email")) +
+                            "\n                    "
+                        )
+                      ])
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
