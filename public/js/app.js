@@ -1807,16 +1807,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/App */ "./resources/js/pages/layouts/App.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     AppLayout: _layouts_App__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  mounted: function mounted() {}
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('auth', ['user']))
 });
 
 /***/ }),
@@ -1934,9 +1952,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('auth', ['authenticated'])),
-  mounted: function mounted() {
-    console.log('Laravel SPA Welcome.');
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -1955,16 +1971,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -38712,7 +38718,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("app-layout", [_vm._v("Dashboard")])
+  return _c("app-layout", [
+    _c("div", { staticClass: "card" }, [
+      _c("h4", { staticClass: "card-header" }, [_vm._v("Home")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _vm.user
+          ? _c("h5", { staticClass: "card-title" }, [
+              _vm._v(
+                "\n                Welcome, " +
+                  _vm._s(_vm.user ? _vm.user.name : "") +
+                  "\n            "
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }, [
+          _vm._v("\n                You are logged in!\n            ")
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39012,7 +39038,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container-fluid" }, [
     _c("nav", { staticClass: "navbar navbar-dark bg-dark" }, [
       _c(
         "nav",
@@ -39077,7 +39103,7 @@ var render = function() {
                     [
                       _vm._v(
                         "\n                            " +
-                          _vm._s(_vm.user.name) +
+                          _vm._s(_vm.user ? _vm.user.name : "") +
                           "\n                        "
                       )
                     ]
@@ -39122,27 +39148,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row mt-5" }, [
-      _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("h4", { staticClass: "card-header" }, [_vm._v("Home")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("h5", { staticClass: "card-title" }, [
-              _vm._v(
-                "\n                        Welcome, " +
-                  _vm._s(_vm.user.name) +
-                  "\n                    "
-              )
-            ]),
-            _vm._v(" "),
-            _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }, [
-              _vm._v(
-                "\n                        You are logged in!\n                    "
-              )
-            ])
-          ])
-        ])
-      ])
+      _c("div", { staticClass: "col" }, [_vm._t("default")], 2)
     ])
   ])
 }
@@ -55044,7 +55050,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 var app = new _container__WEBPACK_IMPORTED_MODULE_1__["default"](vue__WEBPACK_IMPORTED_MODULE_0___default.a);
 app.bootstrap();
-window.app = app; // Load Components.
+window.$app = app; // Load Components.
 
 var files = __webpack_require__("./resources/js sync recursive \\.vue$/");
 
@@ -55192,13 +55198,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
-/* harmony import */ var _lib_router_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/router/index */ "./resources/js/lib/router/index.js");
+/* harmony import */ var _providers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./providers */ "./resources/js/providers/index.js");
 
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -55211,21 +55214,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-
-
-
-
-var _instance = null;
-var initUnsubscribe = null;
-
-var resolve = function resolve(abstract) {
-  if (_instance === null) {
-    // Probably throw some sort of exception. Not bootstrapped yet.
-    return null;
-  }
-
-  return _instance.instances[abstract];
-};
+var container = null;
 
 var Container =
 /*#__PURE__*/
@@ -55234,6 +55223,10 @@ function () {
     _classCallCheck(this, Container);
 
     this.vue = window.Vue = Vue;
+    this.bindings = [];
+    this.instances = [];
+    this.resolved = [];
+    this.providers = [];
   }
 
   _createClass(Container, [{
@@ -55246,8 +55239,8 @@ function () {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
-                Vue.use(vuex__WEBPACK_IMPORTED_MODULE_3__["default"]);
+                Vue.use(VueRouter);
+                Vue.use(Vuex);
 
               case 2:
               case "end":
@@ -55264,51 +55257,156 @@ function () {
       return install;
     }()
   }, {
-    key: "instance",
-    value: function instance() {
-      if (_instance === null) {
-        var created = _instance = new Container(vue__WEBPACK_IMPORTED_MODULE_1___default.a);
-        created.bootstrap();
-        return created;
-      }
-
-      return _instance;
-    }
-  }, {
     key: "bootstrap",
     value: function bootstrap() {
       var _this = this;
 
-      _instance = this;
-      this.vue.use(this.install);
-      this.instances = []; // Can separte this out to providers, but bootstrap needed things
-
-      this.instances['router'] = new _lib_router_index__WEBPACK_IMPORTED_MODULE_5__["default"](this);
-      this.instances['store'] = __webpack_require__(/*! ./lib/store */ "./resources/js/lib/store/index.js").store;
-      initUnsubscribe = this.instances['store'].subscribe(function (mutation, state) {
-        if (mutation.type === 'initialized') {
-          _this.initialize();
-        }
+      container = this;
+      this.register(_providers__WEBPACK_IMPORTED_MODULE_1__["providers"]).then(function () {
+        return _this.boot(_providers__WEBPACK_IMPORTED_MODULE_1__["providers"]);
       });
-      this.instances['store'].dispatch('initialize');
     }
   }, {
-    key: "initialize",
-    value: function initialize() {
-      initUnsubscribe();
-      this.application = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
-        el: '#app',
-        router: this.make('router').router(),
-        store: this.make('store'),
-        render: function render(h) {
-          return h(_components_App__WEBPACK_IMPORTED_MODULE_4__["default"]);
+    key: "register",
+    value: function register(providers) {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        try {
+          for (var p in providers) {
+            _this2.providers[p] = new providers[p](_this2);
+
+            _this2.providers[p].register();
+          }
+
+          resolve(true);
+        } catch (err) {
+          reject(err);
+        }
+      });
+    }
+  }, {
+    key: "boot",
+    value: function boot(providers) {
+      var _this3 = this;
+
+      return new Promise(function (resolve, reject) {
+        try {
+          for (var p in providers) {
+            _this3.providers[p].boot();
+          }
+
+          resolve(true);
+        } catch (err) {
+          reject(err);
         }
       });
     }
   }, {
     key: "make",
     value: function make(abstract) {
-      return resolve(abstract);
+      return this.resolve(abstract);
+    }
+  }, {
+    key: "build",
+    value: function build(concrete) {
+      var parameters = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+      return concrete(parameters);
+    }
+  }, {
+    key: "resolve",
+    value: function resolve(abstract) {
+      if (this.instances[abstract]) {
+        return this.instances[abstract];
+      }
+
+      var concrete = this.getConcrete(abstract);
+      var instance = null;
+
+      if (this.isBuildable(concrete)) {
+        instance = this.build(concrete);
+      } else {
+        instance = this.make(concrete);
+      }
+
+      if (this.isShared(abstract)) {
+        this.instances[abstract] = instance;
+      }
+
+      this.resolved[abstract] = true;
+      return instance;
+    }
+  }, {
+    key: "isBuildable",
+    value: function isBuildable(concrete, abstract) {
+      return typeof concrete === 'function';
+    }
+  }, {
+    key: "getClosure",
+    value: function getClosure(abstract, concrete) {
+      var _this4 = this;
+
+      return function () {
+        if (abstract === concrete) {
+          return _this4.build(concrete);
+        }
+
+        return concrete;
+      };
+    }
+  }, {
+    key: "isShared",
+    value: function isShared(abstract) {
+      return this.instances[abstract] || _typeof(this.bindings[abstract]) === 'object' && this.bindings[abstract]['shared'] === true;
+    }
+  }, {
+    key: "getConcrete",
+    value: function getConcrete(abstract) {
+      if (_typeof(this.bindings[abstract]) === 'object') {
+        return this.bindings[abstract]['concrete'];
+      }
+
+      return abstract;
+    }
+  }, {
+    key: "bind",
+    value: function bind(abstract, concrete) {
+      var shared = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      if (typeof concrete !== 'function') {
+        concrete = this.getClosure(abstract, concrete);
+      }
+
+      this.bindings[abstract] = {
+        concrete: concrete,
+        shared: shared
+      };
+    }
+  }, {
+    key: "singleton",
+    value: function singleton(abstract, concrete) {
+      this.bind(abstract, concrete, true);
+    }
+  }, {
+    key: "instance",
+    value: function instance(abstract, _instance) {
+      this.instances[abstract] = _instance;
+    }
+  }, {
+    key: "forgetInstance",
+    value: function forgetInstance(abstract) {
+      delete this.instances[abstract];
+    }
+  }], [{
+    key: "instance",
+    value: function instance() {
+      if (container === null) {
+        var created = container = new Container(Vue);
+        created.bootstrap();
+        return created;
+      }
+
+      return container;
     }
   }]);
 
@@ -55373,7 +55471,6 @@ function () {
 
     this.app = app;
     this.routes = [];
-    this.intended = null;
   }
 
   _createClass(Router, [{
@@ -55386,31 +55483,15 @@ function () {
   }, {
     key: "router",
     value: function router() {
-      var _this = this;
-
       if (!_router) {
-        __webpack_require__(/*! ../../routes */ "./resources/js/routes.js")(this);
-
         _router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
           routes: [].concat(_toConsumableArray(translateRoutes(this, this.routes)), defaultRoutes),
           mode: 'history'
         });
-
-        _router.beforeEach(function (to, from, next) {
-          _this.setIntended(to);
-
-          return next();
-        });
-
         this.middleware = new _middleware__WEBPACK_IMPORTED_MODULE_1__["default"](this.app, _router, __webpack_require__(/*! ../../middleware */ "./resources/js/middleware.js").default);
       }
 
       return _router;
-    }
-  }, {
-    key: "setIntended",
-    value: function setIntended(destination) {
-      this.intended = destination;
     }
   }]);
 
@@ -55569,6 +55650,68 @@ var middleware = function middleware(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/lib/router/provider.js":
+/*!*********************************************!*\
+  !*** ./resources/js/lib/router/provider.js ***!
+  \*********************************************/
+/*! exports provided: Route */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return Route; });
+/* harmony import */ var _support_provider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../support/provider */ "./resources/js/lib/support/provider.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../router */ "./resources/js/lib/router/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var Route =
+/*#__PURE__*/
+function (_Provider) {
+  _inherits(Route, _Provider);
+
+  function Route() {
+    _classCallCheck(this, Route);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Route).apply(this, arguments));
+  }
+
+  _createClass(Route, [{
+    key: "register",
+    value: function register() {
+      vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
+      this.router = new _router__WEBPACK_IMPORTED_MODULE_3__["default"](this.app);
+      this.app.singleton('router', this.router);
+    }
+  }]);
+
+  return Route;
+}(_support_provider__WEBPACK_IMPORTED_MODULE_0__["Provider"]);
+
+/***/ }),
+
 /***/ "./resources/js/lib/router/route.js":
 /*!******************************************!*\
   !*** ./resources/js/lib/router/route.js ***!
@@ -55653,233 +55796,43 @@ function () {
 
 /***/ }),
 
-/***/ "./resources/js/lib/store/index.js":
-/*!*****************************************!*\
-  !*** ./resources/js/lib/store/index.js ***!
-  \*****************************************/
-/*! exports provided: store */
+/***/ "./resources/js/lib/support/provider.js":
+/*!**********************************************!*\
+  !*** ./resources/js/lib/support/provider.js ***!
+  \**********************************************/
+/*! exports provided: Provider */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "store", function() { return store; });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return Provider; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+var Provider =
+/*#__PURE__*/
+function () {
+  function Provider(app) {
+    _classCallCheck(this, Provider);
 
-
-var initializeList = ['auth'];
-var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["Store"]({
-  state: {
-    initialized: false,
-    loading: false
-  },
-  getters: {
-    initialized: function initialized(state) {
-      for (var c in initializeList) {
-        if (state[initializeList[c]].initialized !== true) {
-          return false;
-        }
-      }
-
-      return state.initialized === true;
-    }
-  },
-  mutations: {
-    initialized: function initialized(state) {
-      state.initialized = true;
-    }
-  },
-  actions: {
-    initialize: function () {
-      var _initialize = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
-        var commit, state, getters, dispatch, c;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                commit = _ref.commit, state = _ref.state, getters = _ref.getters, dispatch = _ref.dispatch;
-
-                if (!(getters.initialized !== true)) {
-                  _context.next = 20;
-                  break;
-                }
-
-                _context.t0 = _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.keys(initializeList);
-
-              case 3:
-                if ((_context.t1 = _context.t0()).done) {
-                  _context.next = 19;
-                  break;
-                }
-
-                c = _context.t1.value;
-
-                if (!(state[initializeList[c]].initialized !== true)) {
-                  _context.next = 17;
-                  break;
-                }
-
-                _context.prev = 6;
-                _context.next = 9;
-                return dispatch("".concat(initializeList[c], "/initialize"));
-
-              case 9:
-                _context.next = 17;
-                break;
-
-              case 11:
-                _context.prev = 11;
-                _context.t2 = _context["catch"](6);
-
-                if (!(_context.t2.response && _context.t2.response.status === 401)) {
-                  _context.next = 16;
-                  break;
-                }
-
-                _context.next = 17;
-                break;
-
-              case 16:
-                throw _context.t2;
-
-              case 17:
-                _context.next = 3;
-                break;
-
-              case 19:
-                if (state.initialized === false) {
-                  commit('initialized');
-                }
-
-              case 20:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[6, 11]]);
-      }));
-
-      function initialize(_x) {
-        return _initialize.apply(this, arguments);
-      }
-
-      return initialize;
-    }()
-  },
-  modules: __webpack_require__(/*! ./modules */ "./resources/js/lib/store/modules/index.js").registrar
-});
-
-/***/ }),
-
-/***/ "./resources/js/lib/store/modules/auth/index.js":
-/*!******************************************************!*\
-  !*** ./resources/js/lib/store/modules/auth/index.js ***!
-  \******************************************************/
-/*! exports provided: store */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "store", function() { return store; });
-// Private methods can go here
-var store = {
-  namespaced: true,
-  strict: true,
-  state: {
-    initialized: false,
-    user: null,
-    authenticated: false
-  },
-  getters: {
-    guest: function guest(state) {
-      return state.authenticated === false;
-    }
-  },
-  mutations: {
-    initialized: function initialized(state) {
-      state.initialized = true;
-    },
-    authenticated: function authenticated(state, payload) {
-      state.authenticated = true;
-      state.user = payload;
-    },
-    logout: function logout(state) {
-      state.authenticated = false;
-      state.user = null;
-    }
-  },
-  actions: {
-    initialize: function initialize(_ref) {
-      var commit = _ref.commit,
-          state = _ref.state;
-      return new Promise(function (resolve, reject) {
-        if (state.initialized === true) {
-          resolve(null);
-        }
-
-        axios.get('/api/user').then(function (response) {
-          commit('authenticated', response.data);
-          commit('initialized');
-          resolve(response);
-        }).catch(function (err) {
-          commit('initialized');
-          reject(err);
-        });
-      });
-    },
-    login: function login(_ref2, credentials) {
-      var commit = _ref2.commit,
-          state = _ref2.state;
-      return new Promise(function (resolve, reject) {
-        axios.post('/login', credentials).then(function (response) {
-          commit('authenticated', response.data);
-          resolve(response);
-        }).catch(function (err) {
-          reject(err);
-        });
-      });
-    },
-    logout: function logout(_ref3) {
-      var commit = _ref3.commit,
-          state = _ref3.state;
-      return new Promise(function (resolve, reject) {
-        axios.post('/logout').then(function (response) {
-          commit('logout');
-          resolve(response);
-        }).catch(function (err) {
-          commit('logout');
-          reject(err);
-        });
-      });
-    }
+    this.app = app;
   }
-};
 
-/***/ }),
+  _createClass(Provider, [{
+    key: "register",
+    value: function register() {// ...
+    }
+  }, {
+    key: "boot",
+    value: function boot() {// ...
+    }
+  }]);
 
-/***/ "./resources/js/lib/store/modules/index.js":
-/*!*************************************************!*\
-  !*** ./resources/js/lib/store/modules/index.js ***!
-  \*************************************************/
-/*! exports provided: registrar */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registrar", function() { return registrar; });
-/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth */ "./resources/js/lib/store/modules/auth/index.js");
-
-var registrar = {
-  auth: _auth__WEBPACK_IMPORTED_MODULE_0__["store"]
-};
+  return Provider;
+}();
 
 /***/ }),
 
@@ -56358,6 +56311,322 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/providers/app.js":
+/*!***************************************!*\
+  !*** ./resources/js/providers/app.js ***!
+  \***************************************/
+/*! exports provided: App */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "App", function() { return App; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_support_provider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/support/provider */ "./resources/js/lib/support/provider.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/App */ "./resources/js/components/App.vue");
+
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+ // Install Libraries to Vue
+
+function libraries(_x) {
+  return _libraries.apply(this, arguments);
+}
+
+function _libraries() {
+  _libraries = _asyncToGenerator(
+  /*#__PURE__*/
+  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(Vue) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _libraries.apply(this, arguments);
+}
+
+var App =
+/*#__PURE__*/
+function (_Provider) {
+  _inherits(App, _Provider);
+
+  function App() {
+    _classCallCheck(this, App);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(App).apply(this, arguments));
+  }
+
+  _createClass(App, [{
+    key: "register",
+    value: function register() {
+      vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(libraries);
+    }
+  }, {
+    key: "boot",
+    value: function boot() {
+      var _this = this;
+
+      var store = this.app.make('store');
+      this.app.instance('store.unsubscribe', store.subscribe(function (mutation) {
+        if (mutation.type === 'initialized') {
+          _this.initialize();
+        }
+      }));
+      store.dispatch('initialize');
+    }
+  }, {
+    key: "initialize",
+    value: function initialize() {
+      this.app.make('store.unsubscribe')();
+      this.app.forgetInstance('store.unsubscribe');
+      this.app.instance('vue', new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
+        el: '#app',
+        router: this.app.make('router').router(),
+        store: this.app.make('store'),
+        render: function render(h) {
+          return h(_components_App__WEBPACK_IMPORTED_MODULE_3__["default"]);
+        }
+      }));
+    }
+  }]);
+
+  return App;
+}(_lib_support_provider__WEBPACK_IMPORTED_MODULE_1__["Provider"]);
+
+/***/ }),
+
+/***/ "./resources/js/providers/auth.js":
+/*!****************************************!*\
+  !*** ./resources/js/providers/auth.js ***!
+  \****************************************/
+/*! exports provided: Auth */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Auth", function() { return Auth; });
+/* harmony import */ var _lib_support_provider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/support/provider */ "./resources/js/lib/support/provider.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+var Auth =
+/*#__PURE__*/
+function (_Provider) {
+  _inherits(Auth, _Provider);
+
+  function Auth() {
+    _classCallCheck(this, Auth);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Auth).apply(this, arguments));
+  }
+
+  _createClass(Auth, [{
+    key: "register",
+    value: function register() {// ...
+    }
+  }]);
+
+  return Auth;
+}(_lib_support_provider__WEBPACK_IMPORTED_MODULE_0__["Provider"]);
+
+/***/ }),
+
+/***/ "./resources/js/providers/index.js":
+/*!*****************************************!*\
+  !*** ./resources/js/providers/index.js ***!
+  \*****************************************/
+/*! exports provided: providers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "providers", function() { return providers; });
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "./resources/js/providers/app.js");
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth */ "./resources/js/providers/auth.js");
+/* harmony import */ var _route__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./route */ "./resources/js/providers/route.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/js/providers/store.js");
+
+
+
+
+var providers = [_app__WEBPACK_IMPORTED_MODULE_0__["App"], _auth__WEBPACK_IMPORTED_MODULE_1__["Auth"], _route__WEBPACK_IMPORTED_MODULE_2__["Route"], _store__WEBPACK_IMPORTED_MODULE_3__["Store"]];
+
+/***/ }),
+
+/***/ "./resources/js/providers/route.js":
+/*!*****************************************!*\
+  !*** ./resources/js/providers/route.js ***!
+  \*****************************************/
+/*! exports provided: Route */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return Route; });
+/* harmony import */ var _lib_router_provider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/router/provider */ "./resources/js/lib/router/provider.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var Route =
+/*#__PURE__*/
+function (_RouteServiceProvider) {
+  _inherits(Route, _RouteServiceProvider);
+
+  function Route() {
+    _classCallCheck(this, Route);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Route).apply(this, arguments));
+  }
+
+  _createClass(Route, [{
+    key: "register",
+    value: function register() {
+      _get(_getPrototypeOf(Route.prototype), "register", this).call(this); // Load Routes
+
+
+      __webpack_require__(/*! ../routes */ "./resources/js/routes.js")(this.router);
+    }
+  }, {
+    key: "boot",
+    value: function boot() {}
+  }]);
+
+  return Route;
+}(_lib_router_provider__WEBPACK_IMPORTED_MODULE_0__["Route"]);
+
+/***/ }),
+
+/***/ "./resources/js/providers/store.js":
+/*!*****************************************!*\
+  !*** ./resources/js/providers/store.js ***!
+  \*****************************************/
+/*! exports provided: Store */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony import */ var _lib_support_provider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib/support/provider */ "./resources/js/lib/support/provider.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var Store =
+/*#__PURE__*/
+function (_Provider) {
+  _inherits(Store, _Provider);
+
+  function Store() {
+    _classCallCheck(this, Store);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Store).apply(this, arguments));
+  }
+
+  _createClass(Store, [{
+    key: "register",
+    value: function register() {
+      vue__WEBPACK_IMPORTED_MODULE_2___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+      this.app.bind('store', __webpack_require__(/*! ../store */ "./resources/js/store/index.js").store, true);
+    }
+  }]);
+
+  return Store;
+}(_lib_support_provider__WEBPACK_IMPORTED_MODULE_0__["Provider"]);
+
+/***/ }),
+
 /***/ "./resources/js/routes.js":
 /*!********************************!*\
   !*** ./resources/js/routes.js ***!
@@ -56369,6 +56638,236 @@ module.exports = function (router) {
   router.get('/', __webpack_require__(/*! ./pages/Welcome */ "./resources/js/pages/Welcome.vue").default).name('welcome');
   router.get('/login', __webpack_require__(/*! ./pages/Login */ "./resources/js/pages/Login.vue").default).middleware('guest').name('login');
   router.get('/home', __webpack_require__(/*! ./pages/Home */ "./resources/js/pages/Home.vue").default).middleware('auth').name('home');
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/index.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/index.js ***!
+  \*************************************/
+/*! exports provided: store */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "store", function() { return store; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var initializeList = ['auth'];
+var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["Store"]({
+  state: {
+    initialized: false,
+    loading: false
+  },
+  getters: {
+    initialized: function initialized(state) {
+      for (var c in initializeList) {
+        if (state[initializeList[c]].initialized !== true) {
+          return false;
+        }
+      }
+
+      return state.initialized === true;
+    }
+  },
+  mutations: {
+    initialized: function initialized(state) {
+      state.initialized = true;
+    }
+  },
+  actions: {
+    initialize: function () {
+      var _initialize = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+        var commit, state, getters, dispatch, c;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit, state = _ref.state, getters = _ref.getters, dispatch = _ref.dispatch;
+
+                if (!(getters.initialized !== true)) {
+                  _context.next = 20;
+                  break;
+                }
+
+                _context.t0 = _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.keys(initializeList);
+
+              case 3:
+                if ((_context.t1 = _context.t0()).done) {
+                  _context.next = 19;
+                  break;
+                }
+
+                c = _context.t1.value;
+
+                if (!(state[initializeList[c]].initialized !== true)) {
+                  _context.next = 17;
+                  break;
+                }
+
+                _context.prev = 6;
+                _context.next = 9;
+                return dispatch("".concat(initializeList[c], "/initialize"));
+
+              case 9:
+                _context.next = 17;
+                break;
+
+              case 11:
+                _context.prev = 11;
+                _context.t2 = _context["catch"](6);
+
+                if (!(_context.t2.response && _context.t2.response.status === 401)) {
+                  _context.next = 16;
+                  break;
+                }
+
+                _context.next = 17;
+                break;
+
+              case 16:
+                throw _context.t2;
+
+              case 17:
+                _context.next = 3;
+                break;
+
+              case 19:
+                if (state.initialized === false) {
+                  commit('initialized');
+                }
+
+              case 20:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[6, 11]]);
+      }));
+
+      function initialize(_x) {
+        return _initialize.apply(this, arguments);
+      }
+
+      return initialize;
+    }()
+  },
+  modules: __webpack_require__(/*! ./modules */ "./resources/js/store/modules/index.js").registrar
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/auth/index.js":
+/*!**************************************************!*\
+  !*** ./resources/js/store/modules/auth/index.js ***!
+  \**************************************************/
+/*! exports provided: store */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "store", function() { return store; });
+// Private methods can go here
+var store = {
+  namespaced: true,
+  strict: true,
+  state: {
+    initialized: false,
+    user: null,
+    authenticated: false
+  },
+  getters: {
+    guest: function guest(state) {
+      return state.authenticated === false;
+    }
+  },
+  mutations: {
+    initialized: function initialized(state) {
+      state.initialized = true;
+    },
+    authenticated: function authenticated(state, payload) {
+      state.authenticated = true;
+      state.user = payload;
+    },
+    logout: function logout(state) {
+      state.authenticated = false;
+      state.user = null;
+    }
+  },
+  actions: {
+    initialize: function initialize(_ref) {
+      var commit = _ref.commit,
+          state = _ref.state;
+      return new Promise(function (resolve, reject) {
+        if (state.initialized === true) {
+          resolve(null);
+        }
+
+        axios.get('/api/user').then(function (response) {
+          commit('authenticated', response.data);
+          commit('initialized');
+          resolve(response);
+        }).catch(function (err) {
+          commit('initialized');
+          reject(err);
+        });
+      });
+    },
+    login: function login(_ref2, credentials) {
+      var commit = _ref2.commit,
+          state = _ref2.state;
+      return new Promise(function (resolve, reject) {
+        axios.post('/login', credentials).then(function (response) {
+          commit('authenticated', response.data);
+          resolve(response);
+        }).catch(function (err) {
+          reject(err);
+        });
+      });
+    },
+    logout: function logout(_ref3) {
+      var commit = _ref3.commit,
+          state = _ref3.state;
+      return new Promise(function (resolve, reject) {
+        axios.post('/logout').then(function (response) {
+          commit('logout');
+          resolve(response);
+        }).catch(function (err) {
+          commit('logout');
+          reject(err);
+        });
+      });
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/index.js":
+/*!*********************************************!*\
+  !*** ./resources/js/store/modules/index.js ***!
+  \*********************************************/
+/*! exports provided: registrar */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "registrar", function() { return registrar; });
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth */ "./resources/js/store/modules/auth/index.js");
+
+var registrar = {
+  auth: _auth__WEBPACK_IMPORTED_MODULE_0__["store"]
 };
 
 /***/ }),

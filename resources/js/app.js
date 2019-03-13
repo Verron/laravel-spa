@@ -6,7 +6,7 @@ import Container from './container';
 const app = new Container(Vue);
 
 app.bootstrap();
-window.app = app;
+window.$app = app;
 
 // Load Components.
 const files = require.context('./', true, /\.vue$/i);

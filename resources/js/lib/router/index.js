@@ -24,7 +24,6 @@ class Router {
     constructor(app) {
         this.app = app;
         this.routes = [];
-        this.intended = null;
     }
 
     get(path, component) {
@@ -38,23 +37,16 @@ class Router {
     router() {
         if (!router) {
 
-            require('../../routes')(this);
 
             router = new VueRouter({
                 routes: [...translateRoutes(this, this.routes), ...defaultRoutes],
                 mode: 'history',
             });
 
-            router.beforeEach((to, from, next) => {this.setIntended(to); return next();});
-
             this.middleware = new Middleware(this.app, router, require('../../middleware').default);
         }
 
         return router;
-    }
-
-    setIntended(destination) {
-        this.intended = destination;
     }
 }
 

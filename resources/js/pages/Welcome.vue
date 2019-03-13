@@ -33,7 +33,6 @@
             ])
         },
         mounted() {
-            console.log('Laravel SPA Welcome.');
         }
     }
 </script>

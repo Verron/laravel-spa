@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <nav class="navbar navbar-dark bg-dark">
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <router-link :to="{name: 'welcome'}" class="navbar-brand">SPA</router-link>
@@ -20,7 +20,7 @@
                     <form class="form-inline mt-2 mt-md-0">
                         <div class="dropdown">
                             <a class="dropdown-toggle user-name" href="#" id="userNavMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ user.name }}
+                                {{ user ? user.name : '' }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userNavMenu">
                                 <router-link class="dropdown-item" :to="{name: 'home'}">Dashboard</router-link>
@@ -35,17 +35,7 @@
         </nav>
         <div class="row mt-5">
             <div class="col">
-                <div class="card">
-                    <h4 class="card-header">Home</h4>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            Welcome, {{ user.name }}
-                        </h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            You are logged in!
-                        </h6>
-                    </div>
-                </div>
+                <slot></slot>
             </div>
         </div>
     </div>

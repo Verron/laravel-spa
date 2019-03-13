@@ -1,26 +1,17 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Vuex from 'vuex';
-import App from "./components/App";
-import Router from './lib/router/index';
 
-let instance = null;
-let initUnsubscribe = null;
+import { providers } from './providers';
 
-const resolve = (abstract) => {
-    if (instance === null) {
-        // Probably throw some sort of exception. Not bootstrapped yet.
-        return null
-    }
-
-    return instance.instances[abstract];
-}
+let container = null;
 
 class Container {
 
     constructor(Vue)
     {
         this.vue = window.Vue = Vue;
+        this.bindings = [];
+        this.instances = [];
+        this.resolved = [];
+        this.providers = [];
     }
 
     async install (Vue) {
@@ -28,50 +19,132 @@ class Container {
         Vue.use(Vuex);
     }
 
-    instance()
+    static instance()
     {
-        if (instance === null) {
-            let created = instance = new Container(Vue);
+        if (container === null) {
+            let created = container = new Container(Vue);
 
             created.bootstrap();
 
             return created;
         }
 
-        return instance;
+        return container;
     }
 
     bootstrap()
     {
-        instance = this;
-        this.vue.use(this.install);
-        this.instances = [];
+        container = this;
 
-        // Can separte this out to providers, but bootstrap needed things
-        this.instances['router'] = new Router(this);
-        this.instances['store'] = require('./lib/store').store;
-
-        initUnsubscribe = this.instances['store'].subscribe((mutation, state) => {
-            if (mutation.type === 'initialized') {
-                this.initialize();
-            }
-        });
-
-        this.instances['store'].dispatch('initialize');
+        this.register(providers).then(() => this.boot(providers));
     }
 
-    initialize() {
-        initUnsubscribe();
-        this.application = new Vue({
-            el: '#app',
-            router: this.make('router').router(),
-            store: this.make('store'),
-            render: h => h(App),
+    register(providers) {
+        return new Promise((resolve, reject) => {
+            try {
+                for (let p in providers) {
+                    this.providers[p] = new providers[p](this);
+
+                    this.providers[p].register();
+                }
+
+                resolve(true);
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+
+    boot(providers) {
+        return new Promise((resolve, reject) => {
+            try {
+                for (let p in providers) {
+                    this.providers[p].boot();
+                }
+
+                resolve(true);
+            } catch (err) {
+                reject(err);
+            }
         });
     }
     
     make(abstract) {
-        return resolve(abstract);
+        return this.resolve(abstract);
+    }
+
+    build(concrete, parameters = []) {
+        return concrete(parameters);
+    }
+    resolve(abstract) {
+
+        if (this.instances[abstract]) {
+            return this.instances[abstract];
+        }
+
+        let concrete = this.getConcrete(abstract);
+
+        let instance = null;
+
+        if (this.isBuildable(concrete)) {
+            instance = this.build(concrete);
+        } else {
+            instance = this.make(concrete);
+        }
+
+        if (this.isShared(abstract)) {
+            this.instances[abstract] = instance;
+        }
+
+
+        this.resolved[abstract] = true;
+
+        return instance;
+    }
+
+    isBuildable(concrete, abstract) {
+        return typeof concrete === 'function';
+    }
+
+    getClosure(abstract, concrete) {
+        return (...parameters) => {
+            if (abstract === concrete) {
+                return this.build(concrete);
+            }
+            return concrete;
+        }
+    }
+
+    isShared(abstract) {
+        return this.instances[abstract] || (typeof this.bindings[abstract] === 'object' && this.bindings[abstract]['shared'] === true);
+    }
+
+    getConcrete(abstract) {
+        if (typeof this.bindings[abstract] === 'object') {
+            return this.bindings[abstract]['concrete'];
+        }
+
+        return abstract;
+    }
+
+    bind(abstract, concrete, shared = false) {
+
+        if (typeof concrete !== 'function') {
+            concrete = this.getClosure(abstract, concrete);
+        }
+
+        this.bindings[abstract] = {concrete, shared};
+    }
+    singleton(abstract, concrete) {
+        this.bind(abstract, concrete, true);
+    }
+
+    instance(abstract, instance) {
+        this.instances[abstract] = instance;
+    }
+
+    forgetInstance(abstract) {
+        delete this.instances[abstract];
     }
 }
 
