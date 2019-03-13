@@ -6,15 +6,11 @@ import Error from '../../pages/Error';
 let router = null;
 
 const translateRoutes = function (router, routes) {
-    console.log('wha', routes);
-
     let results = [];
 
     routes.forEach((route) => {
         results.push(route.translate())
     });
-
-    console.log('defined', results);
 
     return results;
 };
@@ -51,7 +47,7 @@ class Router {
 
             router.beforeEach((to, from, next) => {this.setIntended(to); return next();});
 
-            this.middleware = new Middleware(router);
+            this.middleware = new Middleware(this.app, router, require('../../middleware').default);
         }
 
         return router;

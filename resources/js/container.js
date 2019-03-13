@@ -5,6 +5,7 @@ import App from "./components/App";
 import Router from './lib/router/index';
 
 let instance = null;
+let initUnsubscribe = null;
 
 const resolve = (abstract) => {
     if (instance === null) {
@@ -49,9 +50,18 @@ class Container {
         // Can separte this out to providers, but bootstrap needed things
         this.instances['router'] = new Router(this);
         this.instances['store'] = require('./lib/store').store;
+
+        initUnsubscribe = this.instances['store'].subscribe((mutation, state) => {
+            if (mutation.type === 'initialized') {
+                this.initialize();
+            }
+        });
+
+        this.instances['store'].dispatch('initialize');
     }
 
     initialize() {
+        initUnsubscribe();
         this.application = new Vue({
             el: '#app',
             router: this.make('router').router(),

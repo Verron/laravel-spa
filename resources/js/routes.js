@@ -3,5 +3,5 @@ module.exports = function (router) {
 
     router.get('/login', require('./pages/Login').default).middleware('guest').name('login');
 
-    router.get('/home', require('./pages/Dashboard').default).middleware('auth').name('dashboard');
+    router.get('/home', require('./pages/Home').default).middleware('auth').name('home');
 };

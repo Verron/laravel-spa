@@ -1,7 +1,8 @@
 <template>
     <div class="flex-center position-ref full-height">
         <div class="top-right links">
-            <router-link to="login">Login</router-link>
+            <router-link :to="{name: 'login'}" v-if="authenticated === false">Login</router-link>
+            <router-link :to="{name: 'home'}" v-if="authenticated === true">Home</router-link>
         </div>
 
         <div class="content">
@@ -23,7 +24,14 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
+
     export default {
+        computed: {
+            ...mapState('auth', [
+                'authenticated',
+            ])
+        },
         mounted() {
             console.log('Laravel SPA Welcome.');
         }

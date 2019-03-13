@@ -13,7 +13,6 @@
             })
         },
         mounted() {
-            this.initializeAuth().then(() => this.$store.commit('initialized')).catch(() => this.$store.commit('initialized'));
         },
         computed: {
             ...mapGetters(['initialized'])

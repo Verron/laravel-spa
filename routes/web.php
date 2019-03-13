@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/{any}', function () {
+Illuminate\Support\Facades\Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '.*');
+
+Illuminate\Support\Facades\Route::post('/login', 'Auth\LoginController@login');
+Illuminate\Support\Facades\Route::post('/logout', 'Auth\LoginController@logout');

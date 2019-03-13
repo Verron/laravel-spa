@@ -2,7 +2,7 @@
     <div class="container-fluid full-height">
         <div class="top-right links">
             <slot name="nav-links">
-                <router-link :to="{name: 'welcome'}">Home</router-link>
+                <router-link :to="{name: 'welcome'}">Welcome</router-link>
             </slot>
         </div>
         <slot></slot>

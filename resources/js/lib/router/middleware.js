@@ -16,8 +16,10 @@ function nextFactory(context, middleware, index) {
 }
 
 class Middleware {
-    constructor(router) {
+    constructor(app, router, registrar) {
+        this.app = app;
         this.router = router;
+        this.registrar = registrar;
         
         this.router.beforeEach((to, from, next) => this.handle(to, from, next));
     }
@@ -32,14 +34,27 @@ class Middleware {
                 from,
                 next,
                 router: this.router,
+                app: this.app,
                 to,
             };
             const nextMiddleware = nextFactory(context, middleware, 1);
 
-            return typeof middleware[0] === 'function' ? middleware[0]({...context, next: nextMiddleware}) : next();
+            return this.resolve(middleware[0])({...context, next: nextMiddleware});
         }
 
         return next();
+    }
+
+    resolve(middleware) {
+        if (typeof middleware === 'function') {
+            return middleware;
+        }
+
+        if (this.registrar.hasOwnProperty(middleware) && typeof this.registrar[middleware] === 'function') {
+            return this.registrar[middleware];
+        }
+
+        throw `Middleware not found: ${middleware}`;
     }
 }
 

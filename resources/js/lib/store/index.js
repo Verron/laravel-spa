@@ -1,6 +1,6 @@
 import { Store } from 'vuex';
 
-const checkInitialized = [
+const initializeList = [
     'auth',
 ];
 
@@ -10,11 +10,9 @@ export const store = new Store({
         loading: false,
     },
     getters: {
-        initialized(state, param, param2, param3) {
-            console.log('state', state, param, param2, param2);
-
-            for (let c in checkInitialized) {
-                if (state[checkInitialized[c]].initialized !== true) {
+        initialized(state) {
+            for (let c in initializeList) {
+                if (state[initializeList[c]].initialized !== true) {
                     return false;
                 }
             }
@@ -25,6 +23,30 @@ export const store = new Store({
     mutations: {
         initialized(state) {
             state.initialized = true;
+        }
+    },
+    actions: {
+        async initialize({commit, state, getters, dispatch}) {
+            if (getters.initialized !== true) {
+                for (let c in initializeList) {
+                    if (state[initializeList[c]].initialized !== true) {
+                        try {
+                            await dispatch(`${initializeList[c]}/initialize`);
+                        } catch (err) {
+                            if (err.response && err.response.status === 401) {
+                                // Do something to better explain. Maybe an alert?
+
+                            } else {
+                                throw err;
+                            }
+                        }
+                    }
+                }
+
+                if (state.initialized === false) {
+                    commit('initialized');
+                }
+            }
         }
     },
     modules: require('./modules').registrar,
