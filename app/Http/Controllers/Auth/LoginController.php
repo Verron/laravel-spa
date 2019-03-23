@@ -37,7 +37,7 @@ class LoginController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param ApiTokenCookieFactory $cookieFactory
      */
     public function __construct(ApiTokenCookieFactory $cookieFactory)
     {
@@ -74,6 +74,6 @@ class LoginController extends Controller
      */
     protected function loggedOut(Request $request)
     {
-        return response()->json(['staus' => 'success']);
+        return response()->json(['status' => 'success']);
     }
 }

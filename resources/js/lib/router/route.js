@@ -6,7 +6,7 @@ const toVueRoute = function (route) {
     result.component = route.routeComponent;
 
     if (route.routeMiddleware) {
-        result.meta = {middleware: [route.routeMiddleware]};
+        result.meta = {middleware: {action: route.routeMiddleware, params: route.routeMiddlewareParameters}};
     }
 
     if (route.routeName) {
@@ -24,6 +24,7 @@ class Route {
         this.routePath = null;
         this.routeComponent = null;
         this.routeMiddleware = null;
+        this.routeMiddlewareParameters = [];
     }
 
     name(name) {
@@ -45,6 +46,19 @@ class Route {
     }
 
     middleware(middleware) {
+        if (typeof middleware === 'string') {
+            let parts = middleware.split(':');
+            let name = parts[0];
+            let parameters = [];
+            if (parts[1]) {
+                parameters = parts[1].split(',');
+            }
+
+            this.routeMiddleware = name;
+            this.routeMiddlewareParameters = parameters;
+
+            return this;
+        }
         this.routeMiddleware = middleware;
 
         return this;

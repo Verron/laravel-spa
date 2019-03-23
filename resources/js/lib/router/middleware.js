@@ -20,7 +20,7 @@ class Middleware {
         this.app = app;
         this.router = router;
         this.registrar = registrar;
-        
+
         this.router.beforeEach((to, from, next) => this.handle(to, from, next));
     }
 
@@ -39,7 +39,7 @@ class Middleware {
             };
             const nextMiddleware = nextFactory(context, middleware, 1);
 
-            return this.resolve(middleware[0])({...context, next: nextMiddleware});
+            return this.resolve(middleware[0].action).apply(null, [{...context, next: nextMiddleware}, ...middleware[0].params]);
         }
 
         return next();
