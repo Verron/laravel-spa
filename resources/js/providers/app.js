@@ -9,6 +9,8 @@ async function libraries (Vue) {
 export class App extends Provider {
     register() {
         Vue.use(libraries);
+
+        this.loadComponents(Vue);
     }
 
     boot() {
@@ -33,5 +35,23 @@ export class App extends Provider {
             store: this.app.make('store'),
             render: h => h(Application),
         }));
+    }
+
+    loadComponents(VueInstance) {
+        const files = require.context('../', true, /\.vue$/i);
+
+        files.keys().map(key => {
+            let file_parts = key.split('/');
+            let name = '';
+            let component_name = file_parts.pop();
+
+            file_parts.forEach((part_name) => {
+                if (part_name && part_name !== '.') {
+                    name += `${part_name}-`;
+                }
+            });
+
+            VueInstance.component(`${name}${component_name.split('.')[0].toLowerCase()}`, files(key).default)
+        });
     }
 }

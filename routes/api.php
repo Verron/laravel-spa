@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+\Illuminate\Support\Facades\Route::get('/info', function () {
+    return response()->json([
+        'version' => '0.0.0-alpha',
+        'laravel_version' => \Illuminate\Foundation\Application::VERSION,
+    ]);
+});
+
+\Illuminate\Support\Facades\Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -2,6 +2,7 @@ import { Store } from 'vuex';
 
 const initializeList = [
     'auth',
+    'app',
 ];
 
 export const store = new Store({

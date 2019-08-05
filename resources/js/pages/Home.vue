@@ -9,6 +9,21 @@
                 <h6 class="card-subtitle mb-2 text-muted">
                     You are logged in!
                 </h6>
+                <div class="row mt-3">
+                    <div class="col">
+                        <h5>Application Versions</h5>
+                        <dl class="dashboard-versions">
+                            <dt>SPA Version</dt>
+                            <dd>{{ version }}</dd>
+                            <dt>Laravel Version</dt>
+                            <dd>{{ laravel_version }}</dd>
+                            <dt>Vue Version</dt>
+                            <dd>{{ vue_version }}</dd>
+                            <dt>Vuex Version</dt>
+                            <dd>{{ vuex_version }}</dd>
+                        </dl>
+                    </div>
+                </div>
             </div>
         </div>
     </app-layout>
@@ -25,7 +40,25 @@
         computed: {
             ...mapState('auth', [
                 'user'
+            ]),
+            ...mapState('app', [
+                'version',
+                'vue_version',
+                'laravel_version',
+                'vuex_version',
             ])
         },
     }
 </script>
+
+<style lang="scss" scoped>
+    .dashboard-versions {
+        dt {
+            float: left;
+        }
+        dd {
+            margin-left: 120px;
+        }
+    }
+
+</style>

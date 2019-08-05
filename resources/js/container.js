@@ -1,4 +1,3 @@
-
 import { providers } from './providers';
 
 let container = null;
@@ -12,11 +11,6 @@ class Container {
         this.instances = [];
         this.resolved = [];
         this.providers = [];
-    }
-
-    async install (Vue) {
-        Vue.use(VueRouter);
-        Vue.use(Vuex);
     }
 
     static instance()
