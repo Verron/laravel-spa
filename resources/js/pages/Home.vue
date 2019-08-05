@@ -55,9 +55,10 @@
     .dashboard-versions {
         dt {
             float: left;
+            padding-left: 10px;
         }
         dd {
-            margin-left: 120px;
+            margin-left: 130px;
         }
     }
 

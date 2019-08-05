@@ -6617,7 +6617,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".dashboard-versions dt[data-v-b3c5cf30] {\n  float: left;\n}\n.dashboard-versions dd[data-v-b3c5cf30] {\n  margin-left: 120px;\n}", ""]);
+exports.push([module.i, ".dashboard-versions dt[data-v-b3c5cf30] {\n  float: left;\n  padding-left: 10px;\n}\n.dashboard-versions dd[data-v-b3c5cf30] {\n  margin-left: 130px;\n}", ""]);
 
 // exports
 
