@@ -1922,6 +1922,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -39103,21 +39105,25 @@ var render = function() {
       _c("h4", { staticClass: "card-header" }, [_vm._v("Home")]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _vm.user
-          ? _c("h5", { staticClass: "card-title" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col" }, [
+            _vm.user
+              ? _c("h5", { staticClass: "card-title" }, [
+                  _vm._v(
+                    "\n                        Welcome, " +
+                      _vm._s(_vm.user ? _vm.user.name : "") +
+                      "\n                    "
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }, [
               _vm._v(
-                "\n                Welcome, " +
-                  _vm._s(_vm.user ? _vm.user.name : "") +
-                  "\n            "
+                "\n                        You are logged in!\n                    "
               )
             ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }, [
-          _vm._v("\n                You are logged in!\n            ")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row mt-3" }, [
+          ]),
+          _vm._v(" "),
           _c("div", { staticClass: "col" }, [
             _c("h5", [_vm._v("Application Versions")]),
             _vm._v(" "),

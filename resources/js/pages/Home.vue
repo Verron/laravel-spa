@@ -3,13 +3,15 @@
         <div class="card">
             <h4 class="card-header">Home</h4>
             <div class="card-body">
-                <h5 class="card-title" v-if="user">
-                    Welcome, {{ user ? user.name : '' }}
-                </h5>
-                <h6 class="card-subtitle mb-2 text-muted">
-                    You are logged in!
-                </h6>
-                <div class="row mt-3">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title" v-if="user">
+                            Welcome, {{ user ? user.name : '' }}
+                        </h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            You are logged in!
+                        </h6>
+                    </div>
                     <div class="col">
                         <h5>Application Versions</h5>
                         <dl class="dashboard-versions">
