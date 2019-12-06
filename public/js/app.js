@@ -39603,7 +39603,7 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "nav-link",
-          attrs: { href: "https://github.com/develme/laravel-spa" }
+          attrs: { href: "https://github.com/Verron/laravel-spa" }
         },
         [_vm._v("Github")]
       )
@@ -55571,21 +55571,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 var app = new _container__WEBPACK_IMPORTED_MODULE_1__["default"](vue__WEBPACK_IMPORTED_MODULE_0___default.a);
 app.bootstrap();
-window.$app = app; // Load Components.
-
-var files = __webpack_require__("./resources/js sync recursive \\.vue$/");
-
-files.keys().map(function (key) {
-  var file_parts = key.split('/');
-  var name = '';
-  var component_name = file_parts.pop();
-  file_parts.forEach(function (part_name) {
-    if (part_name && part_name !== '.') {
-      name += "".concat(part_name, "-");
-    }
-  });
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("".concat(name).concat(component_name.split('.')[0].toLowerCase()), files(key)["default"]);
-});
+window.$app = app;
 
 /***/ }),
 

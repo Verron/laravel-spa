@@ -14,7 +14,7 @@
                             <router-link :to="{name: 'home'}" class="nav-link">Home <span class="sr-only">(current)</span></router-link>
                         </li>
                         <li class="nav-item">
-                            <a href="https://github.com/develme/laravel-spa" class="nav-link">Github</a>
+                            <a href="https://github.com/Verron/laravel-spa" class="nav-link">Github</a>
                         </li>
                     </ul>
                     <form class="form-inline mt-2 mt-md-0">
