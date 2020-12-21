@@ -1,27 +1,37 @@
 <template>
     <master-layout>
-        <div class="row justify-content-md-center align-content-center mt-n5" style="height: 100vh;">
-            <div class="col-md-auto" style="min-width: 400px;">
-                <h1 class="text-center title m-b-md">Laravel SPA</h1>
+        <div class="flex p-10 md:p-0 md:justify-center items-center -mt-5 h-screen">
+            <div class="flex-1 md:flex-initial md:flex-shrink-0" style="min-width: 400px;">
+                <h1 class="text-center title mb-5">Laravel SPA</h1>
                 <form class="" @submit.prevent="signIn({email, password, remember})">
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="sign_in_email" class="sr-only">Email address</label>
-                        <input type="email" v-model="email" class="form-control"
+                        <input type="email" v-model="email"
+                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                :class="{'is-invalid': hasError('email')}" id="sign_in_email" placeholder="Enter email">
                         <div class="invalid-feedback" v-if="hasError('email')">
                             {{ getError('email') }}
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="sign_in_password" class="sr-only">Password</label>
-                        <input type="password" v-model="password" class="form-control" id="sign_in_password"
+                        <input type="password" v-model="password"
+                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                               id="sign_in_password"
                                placeholder="Password">
                     </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" v-model="remember" class="form-check-input" id="sign_in_remember_me">
-                        <label class="form-check-label" for="sign_in_remember_me">Remember Me</label>
+                    <div class="mb-3 relative flex items-start">
+                        <div class="flex items-center">
+                            <input type="checkbox" v-model="remember"
+                                   class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                                   id="sign_in_remember_me">
+                        </div>
+                        <div class="ml-3 text-sm">
+                            <label class="font-medium text-gray-700" for="sign_in_remember_me">Remember Me</label>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    <button type="submit"
+                            class="block w-full items-center text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Sign In</button>
                 </form>
             </div>
         </div>

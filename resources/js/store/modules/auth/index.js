@@ -34,15 +34,23 @@ export const store = {
                 }
 
                 axios.get('/api/user')
-                    .then((response) => {commit('authenticated', response.data); commit('initialized'); resolve(response)})
-                    .catch((err) => {commit('initialized'); reject(err)});
+                    .then((response) => {
+                        commit('authenticated', response.data);
+                        commit('initialized');
+                        resolve(response)
+                    }).catch((err) => {commit('initialized'); reject(err)});
             });
         },
         login({commit, state}, credentials) {
             return new Promise((resolve, reject) => {
                 axios.post('/login', credentials).then((response) => {
-                    commit('authenticated', response.data);
-                    resolve(response);
+                    axios.get('/api/user')
+                        .then((response) => {
+                            commit('authenticated', response.data);
+                            resolve(response);
+                        }).catch((err) => {
+                            reject(err);
+                    });
                 }).catch((err) => {
                     reject(err);
                 });

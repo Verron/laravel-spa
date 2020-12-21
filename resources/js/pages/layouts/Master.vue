@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid full-height">
+    <div class="w-100 h-100">
         <div class="top-right links">
             <slot name="nav-links">
                 <router-link :to="{name: 'welcome'}">Welcome</router-link>

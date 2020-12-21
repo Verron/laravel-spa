@@ -4,9 +4,8 @@ let container = null;
 
 class Container {
 
-    constructor(Vue)
+    constructor()
     {
-        this.vue = window.Vue = Vue;
         this.bindings = [];
         this.instances = [];
         this.resolved = [];
@@ -62,7 +61,7 @@ class Container {
             }
         });
     }
-    
+
     make(abstract) {
         return this.resolve(abstract);
     }
@@ -78,7 +77,7 @@ class Container {
 
         let concrete = this.getConcrete(abstract);
 
-        let instance = null;
+        let instance;
 
         if (this.isBuildable(concrete)) {
             instance = this.build(concrete);

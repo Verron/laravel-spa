@@ -1,7 +1,7 @@
 // Private methods can go here
 
 import Vuex from 'vuex';
-import Vue from 'vue';
+import { version as VueVersion } from 'vue';
 
 export const store = {
     namespaced: true,
@@ -12,6 +12,7 @@ export const store = {
         laravel_version: null,
         vue_version: null,
         vuex_version: null,
+        vue_router_version: null,
     },
     mutations: {
         initialized(state, payload) {
@@ -20,8 +21,9 @@ export const store = {
             if (payload !== null) {
                 state.version = payload.version;
                 state.laravel_version = payload.laravel_version;
-                state.vue_version = Vue.version;
+                state.vue_version = VueVersion;
                 state.vuex_version = Vuex.version;
+                state.vue_router_version = payload.vue_router_version;
             }
         },
         authenticated(state, payload) {

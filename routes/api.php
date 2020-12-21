@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
+use Illuminate\Foundation\Application;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +17,20 @@ use Illuminate\Http\Request;
 |
 */
 
-\Illuminate\Support\Facades\Route::get('/info', function () {
+Route::get('/info', function () {
+    $vueRouter = [];
+
+    if (File::exists(base_path('node_modules/vue-router/package.json'))) {
+        $vueRouter = json_decode(File::get(base_path('node_modules/vue-router/package.json')), true);
+    }
+
     return response()->json([
-        'version' => '0.0.0-alpha',
-        'laravel_version' => \Illuminate\Foundation\Application::VERSION,
+        'version' => '0.1.0-alpha',
+        'laravel_version' => Application::VERSION,
+        'vue_router_version' => Arr::get($vueRouter, 'version', null),
     ]);
 });
 
-\Illuminate\Support\Facades\Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

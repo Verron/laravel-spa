@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,9 +13,6 @@
 |
 */
 
-Illuminate\Support\Facades\Route::get('/{any}', function () {
+Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '.*');
-
-Illuminate\Support\Facades\Route::post('/login', 'Auth\LoginController@login');
-Illuminate\Support\Facades\Route::post('/logout', 'Auth\LoginController@logout');

@@ -1,4 +1,4 @@
-import VueRouter from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 import Middleware from './middleware';
 import Route from './route';
 import Error from '../../pages/Error';
@@ -16,7 +16,7 @@ const translateRoutes = function (router, routes) {
 };
 
 const defaultRoutes = [
-    {path: '*', component: Error}
+    {path: '/:pathMatch(.*)*', name: 'not-found', component: Error}
 ];
 
 class Router {
@@ -37,10 +37,9 @@ class Router {
     router() {
         if (!router) {
 
-
-            router = new VueRouter({
+            router = createRouter({
+                history: createWebHistory(),
                 routes: [...translateRoutes(this, this.routes), ...defaultRoutes],
-                mode: 'history',
             });
 
             this.middleware = new Middleware(this.app, router, require('../../middleware').default);

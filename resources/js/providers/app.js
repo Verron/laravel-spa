@@ -1,6 +1,6 @@
 import { Provider } from '../lib/support/provider';
-import Vue from 'vue';
 import Application from "../components/App";
+import { createApp, h } from 'vue';
 
 // Install Libraries to Vue
 async function libraries (Vue) {
@@ -8,9 +8,9 @@ async function libraries (Vue) {
 
 export class App extends Provider {
     register() {
-        Vue.use(libraries);
+        // Vue.use(libraries);
 
-        this.loadComponents(Vue);
+        // this.loadComponents(Vue);
     }
 
     boot() {
@@ -29,16 +29,34 @@ export class App extends Provider {
         this.app.make('store.unsubscribe')();
         this.app.forgetInstance('store.unsubscribe');
 
-        this.app.instance('vue', new Vue({
-            el: '#app',
-            router: this.app.make('router').router(),
-            store: this.app.make('store'),
-            render: h => h(Application),
-        }));
+        let instance = createApp({
+            render: () => h(Application),
+            components: this.loadComponents()
+        });
+
+        // Vuex Store
+        instance.use(this.app.make('store'));
+
+        // Vue Router
+        instance.use(this.app.make('router').router());
+
+        instance.mount('#app');
+
+        this.app.instance('vue', instance);
+
+        // this.app.instance('vue', new Vue({
+        //     el: '#app',
+        //     router: this.app.make('router').router(),
+        //     store: this.app.make('store'),
+        // }));
     }
 
-    loadComponents(VueInstance) {
-        const files = require.context('../', true, /\.vue$/i);
+    loadComponents() {
+        const files = require.context('../components', true, /\.vue$/i),
+            prefixComponentName = '',
+            postfixComponentName = '-component';
+
+        const components = {};
 
         files.keys().map(key => {
             let file_parts = key.split('/');
@@ -51,7 +69,9 @@ export class App extends Provider {
                 }
             });
 
-            VueInstance.component(`${name}${component_name.split('.')[0].toLowerCase()}`, files(key).default)
+            components[`${prefixComponentName}${name}${component_name.split('.')[0].toLowerCase()}${postfixComponentName}`] = files(key).default;
         });
+
+        return components;
     }
 }
